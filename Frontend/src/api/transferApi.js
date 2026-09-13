@@ -7,6 +7,8 @@ export const BANKS = [
   { code: "000001", name: "Test Bank" },
 ];
 
+export const INTERBANK_BANKS = BANKS.filter((bank) => bank.code !== "058");
+
 export async function nameEnquiry({ accountNumber, bankCode, isInterBank = false }) {
   const result = await apiRequest({
     path: "/api/transfers/name-enquiry",

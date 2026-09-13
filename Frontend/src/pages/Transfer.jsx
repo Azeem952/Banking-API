@@ -15,13 +15,13 @@ import TextField from "../components/ui/TextField";
 import Button from "../components/ui/Button";
 import { cn, formatCurrency } from "../lib/format";
 import { useAuth } from "../context/AuthContext";
-import { nameEnquiry, transferFunds, BANKS } from "../api/transferApi";
+import { nameEnquiry, transferFunds, INTERBANK_BANKS } from "../api/transferApi";
 
 const STEPS = ["Enter Details", "Review", "Confirm"];
 
 const initialRecipient = {
   accountNumber: "",
-  bankCode: BANKS[0].code,
+  bankCode: INTERBANK_BANKS[0].code,
   resolvedName: null,
   resolvedBank: null,
   enquiryStatus: "idle", // idle | loading | found | error
@@ -303,7 +303,7 @@ function DetailsStep({
             onChange={(e) => onBankChange(e.target.value)}
             className="h-11 w-full rounded-lg border border-surface-300 bg-white px-3.5 text-sm text-ink-900 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
           >
-            {BANKS.filter((b) => b.code !== "058").map((b) => (
+            {INTERBANK_BANKS.map((b) => (
               <option key={b.code} value={b.code}>
                 {b.name}
               </option>
