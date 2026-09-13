@@ -70,6 +70,26 @@ app.use('/api/account', accountRoutes);
 app.use('/api/transfers', transferRoutes);
 app.use('/api/transactions', transactionRoutes);
 
+app.get('/', (request, response) => {
+  response.status(200).json({
+    success: true,
+    message: 'Digital banking API is running',
+    data: {
+      status: 'ok',
+      environment: env.nodeEnv,
+      timestamp: new Date().toISOString(),
+    },
+  });
+});
+
+app.get('/health', (request, response) => {
+  response.status(200).json({
+    success: true,
+    message: 'Health check passed',
+    data: { status: 'ok' },
+  });
+});
+
 app.use((request, response, next) => {
   response.apiSuccess = (data, message) => {
     response.json({ success: true, message: message || 'Request successful', data });
